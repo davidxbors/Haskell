@@ -1,13 +1,11 @@
-func    :: [Int] -> [Int] -> Int -> [Int]
-func list1 list2 len
-    | len == -1      = []
-    | mod len 2 == 0 = do
-        let val = toInteger(((len + 2) / 2))
-        list1 !! val : func list1 list2 (len - 1)
-    | otherwise      = list2 !! ((len + 1) / 2) : func list1 list2 (len - 1)
+merge   :: [Int] -> [Int] -> [Int]
+merge l1 l2
+    | (length l2) > 0 = (head l1) : (head l2) : (merge (tail l1) (tail l2))
+    | otherwise = []
+
 
 main = do
-    let list1 = [1,3,5]
-    let list2 = [2,4,6]
+    let list1 = (filter odd [1..100])
+    let list2 = (filter even [1..100])
 
-    print (func list1 list2 (length list1 + length list2 - 2))
+    print (merge list1 list2)
